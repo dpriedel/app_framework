@@ -1,0 +1,11 @@
+# anything generated here
+/Debug*
+
+#	python compiled files
+*pyc
+
+.cproject
+.project
+
+xxsrc
+makefile
