@@ -278,10 +278,10 @@ void	CApplication::SetupProgramOptions(void)
 
 void 	CApplication::ParseProgramOptions(void)
 {
-	auto options = po::parse_command_line(mArgc, mArgv, mNewOptions);
+	decltype(auto) options = po::parse_command_line(mArgc, mArgv, mNewOptions);
 	this->Do_ParseProgramOptions(options);
 	po::store(options, mVariableMap);
-	if (mVariableMap.count("help"))
+	if (this->GetArgCount() == 0	||	mVariableMap.count("help"))
 	{
 		std::cout << mNewOptions << "\n";
 		dfail_msg_("\nExit after 'help'.");
@@ -292,7 +292,7 @@ void 	CApplication::ParseProgramOptions(void)
 
 void 	CApplication::ParseProgramOptions(const std::vector<std::string>* tokens)
 {
-	auto options = po::command_line_parser(*tokens).options(mNewOptions).run();
+	decltype(auto) options = po::command_line_parser(*tokens).options(mNewOptions).run();
 	this->Do_ParseProgramOptions(options);
 	po::store(options, mVariableMap);
 	if (mVariableMap.count("help"))
